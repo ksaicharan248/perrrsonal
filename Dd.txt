@@ -1,0 +1,57 @@
+Portfolio Engineering Guidelines
+
+Objective
+
+Build a premium, minimal, professional developer portfolio from scratch for Sai Charan K. The website must feel intentionally designed by a human, not generated from a generic AI landing-page template.
+
+Visual identity
+
+- Background: solid #0D1117.
+- Surface: #151B23.
+- Primary accent: #4F8CFF, used sparingly.
+- Main text: #F0F6FC.
+- Secondary text: #9DA7B3.
+- Borders: subtle neutral grey.
+- Use translucent glass cards selectively with thin borders and restrained backdrop blur.
+- Use strong typography, deliberate spacing, asymmetrical composition where appropriate, and a clear visual hierarchy.
+- No gradients, neon, glow effects, rainbow badges, floating blobs, emoji decorations, excessive animations, or unnecessary glass effects.
+- Avoid generic centered hero layouts unless they genuinely improve the design.
+- Do not use invented metrics, fake testimonials, fake clients, or fabricated achievements.
+
+Professional positioning
+
+Present Sai Charan as a software engineer with experience in React, Java, Spring Boot, REST APIs, microservices, and enterprise application development.
+
+Emphasize engineering decisions, problem-solving, maintainability, performance, and end-to-end ownership.
+
+Keep employer-related project descriptions generic. Never expose confidential banking workflows, internal architecture, customer data, private repositories, or proprietary implementation details.
+
+Technical standards
+
+- Use React and TypeScript with Vite unless a justified alternative is approved.
+- Use reusable, well-structured components and a consistent design-token system.
+- Keep dependencies minimal and justified.
+- Build responsive layouts for mobile, tablet, and desktop.
+- Follow semantic HTML, accessible keyboard navigation, visible focus states, and appropriate contrast.
+- Optimize images, fonts, loading behavior, and Core Web Vitals.
+- Respect reduced-motion preferences.
+- Ensure every button, link, navigation item, and interaction works.
+- Include appropriate metadata, a descriptive page title, social sharing metadata, and a favicon.
+- Never expose secrets or commit environment files containing credentials.
+
+Workflow
+
+1. Use gstack to clarify the portfolio's goals before implementation.
+2. Establish the design direction and review it before coding.
+3. Create an engineering plan and identify the simplest suitable architecture.
+4. Implement in small, reviewable stages.
+5. Run available lint, type-check, build, and test commands.
+6. Use gstack code review and browser QA to find and fix defects.
+7. Inspect mobile and desktop layouts before release.
+8. Explain trade-offs and report any checks that could not be completed.
+
+Do not deploy, push changes, or overwrite existing work without explicit approval.
+
+Definition of done
+
+The portfolio must be visually distinctive, fast, responsive, accessible, technically sound, free of placeholder content, and ready for deployment after final review.
