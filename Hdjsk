@@ -1,0 +1,218 @@
+RCA Investigation: Duplicate Camunda 8.2 Job Execution Across Multiple Pods
+
+Act as a Senior Camunda 8 / Zeebe Architect and Java Spring Boot Production Reliability Engineer.
+
+Context
+
+We are experiencing duplicate job execution in our production Camunda application.
+
+Our environment:
+
+- Camunda Platform / Zeebe: 8.2.20
+- Spring Boot: 4.1.1
+- Deployment: Kubernetes
+- Multiple application pods (approximately 20 pods in production).
+- Same application and job-worker implementations are deployed across pods.
+- Multiple pods register the same Zeebe job-worker types.
+- We have a custom "ZeebeActuatorExclusionFilter" introduced for Spring Boot and Camunda compatibility.
+
+The custom class:
+
+"ZeebeActuatorExclusionFilter implements AutoConfigurationImportFilter"
+
+It excludes:
+
+"io.camunda.zeebe.spring.client.configuration.ZeebeActuatorConfiguration"
+
+The filter prevents this auto-configuration from being imported.
+
+We suspect this compatibility workaround may be affecting health monitoring, but we do not yet know whether it contributes to duplicate job execution.
+
+Objective
+
+Perform a complete repository-level Root Cause Analysis (RCA) to identify why the same business operation or Camunda job is being executed multiple times across pods.
+
+Do not assume the health configuration is the root cause.
+
+Investigation Areas
+
+1. Zeebe Job Worker Configuration
+
+Inspect all job-worker implementations and their configurations.
+
+Identify:
+
+- Where workers are registered.
+- Whether workers are registered more than once.
+- Worker types and job activation settings.
+- Job timeout / activation timeout.
+- Maximum jobs active.
+- Poll interval and request timeout.
+- Worker concurrency and thread-pool configuration.
+- Job completion and failure handling.
+- Retry handling.
+- Whether long-running jobs can exceed activation timeout.
+- Whether workers continue processing after losing connectivity.
+
+2. Custom Health Configuration
+
+Investigate:
+
+"ZeebeActuatorExclusionFilter"
+
+Determine:
+
+- What functionality "ZeebeActuatorConfiguration" provides in the exact dependency version used.
+- Which Actuator health indicators or endpoints are affected by excluding it.
+- Whether health indicators are replaced, overridden, or disabled elsewhere.
+- Whether Kubernetes readiness and liveness probes correctly reflect application health.
+- Whether a disconnected or unhealthy Zeebe client can remain operational from Kubernetes' perspective.
+
+Trace the actual Spring Boot auto-configuration imports and conditions.
+
+Do not assume that excluding Actuator configuration changes job distribution.
+
+3. Duplicate Job Execution Analysis
+
+Trace the full lifecycle:
+
+1. Job activation.
+2. Worker receives the job.
+3. Business processing starts.
+4. Business processing completes.
+5. Job completion is acknowledged by Zeebe.
+
+Identify possible duplicate execution scenarios:
+
+- Activation timeout and job reassignment.
+- Worker crashes during processing.
+- Network interruptions.
+- Failed completion acknowledgement.
+- Job retries.
+- Multiple worker registrations.
+- Concurrent processing of the same business entity.
+- Duplicate process instance creation.
+- Application-level event or message redelivery.
+
+Distinguish between the same Zeebe job being executed more than once and different jobs executing the same business operation.
+
+4. Kubernetes and Pod Investigation
+
+Inspect:
+
+- Deployment replicas.
+- Readiness, liveness and startup probes.
+- Restart policies.
+- CPU and memory limits.
+- Pod termination and graceful shutdown.
+- Rolling deployments.
+- Worker lifecycle during pod termination.
+- Network interruptions between pods and Zeebe brokers.
+
+Determine whether pod restarts or deployment events correlate with duplicate executions.
+
+5. Dependency Compatibility
+
+Inspect the actual Maven dependency tree and versions.
+
+Check compatibility between:
+
+- Spring Boot 4.1.1.
+- Camunda 8.2.20.
+- Zeebe Spring Client.
+- Spring Actuator.
+- Relevant Spring Cloud dependencies.
+
+Identify unsupported combinations, compatibility workarounds and possible side effects.
+
+Do not assume version incompatibility without evidence.
+
+6. Logging and Observability
+
+Inspect existing logging implementation.
+
+Determine whether logs capture:
+
+- Job key.
+- Process instance key.
+- Process definition key.
+- Worker type.
+- Pod name / hostname.
+- Job retries.
+- Activation timestamp.
+- Completion timestamp.
+- Activation timeout.
+- Exception details.
+
+Recommend the minimum additional logging needed to prove the root cause.
+
+Investigation Rules
+
+1. Read the existing code before making recommendations.
+2. Trace actual execution paths instead of relying on assumptions.
+3. Do not modify any source files.
+4. Do not change dependency versions.
+5. Do not introduce a distributed lock or hash coordinator as the first solution.
+6. Do not recommend increasing timeouts without examining actual processing duration.
+7. Do not assume Kubernetes readiness stops Zeebe workers from polling.
+8. Do not confuse multiple workers consuming the same job type with duplicate execution.
+9. Do not invent configuration properties or APIs. Verify them against the versions present in the repository.
+10. Clearly separate confirmed findings, probable causes and unverified hypotheses.
+
+Expected RCA Report
+
+Produce a structured report containing:
+
+A. Executive Summary
+
+Explain the issue in simple language.
+
+B. Architecture and Execution Flow
+
+Show how jobs move from Zeebe to the 20 application pods.
+
+C. Findings
+
+For every finding provide:
+
+- Exact file path.
+- Class or method name.
+- Relevant configuration.
+- Evidence from source code.
+- Why it matters.
+
+D. Root Cause Ranking
+
+Rank potential causes by probability and evidence:
+
+Priority| Potential cause| Evidence| Confidence
+
+E. Health Configuration Impact
+
+Explain precisely what our "ZeebeActuatorExclusionFilter" disables and whether it can contribute to the issue.
+
+F. Recommended Fix
+
+For every confirmed issue provide:
+
+- Minimum code/configuration change.
+- Why the change works.
+- Production risks.
+- Rollback strategy.
+- Required testing.
+
+G. Validation Plan
+
+Provide a reproducible test to verify that the same job key cannot produce overlapping business execution.
+
+H. Missing Evidence
+
+List the exact logs, configurations or runtime information still required to confirm the RCA.
+
+Final Requirement
+
+Do not immediately implement a solution.
+
+First deliver the RCA with evidence and identify the single most likely root cause.
+
+Our priority is a production-safe fix for a 20-pod Camunda 8.2 deployment without unnecessary database schema changes or additional infrastructure.
