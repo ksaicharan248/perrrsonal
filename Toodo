@@ -1,0 +1,624 @@
+Enterprise RCA Multi-Agent System — Copilot Build Plan
+
+1. Mission
+
+Act as a Senior AI Agent Architect and Senior Enterprise Software Engineer.
+
+Design and build a production-grade, multi-agent Root Cause Analysis (RCA) investigation system using native GitHub Copilot Agent capabilities inside Visual Studio Code.
+
+The objective is to transform the existing single-agent RCA investigation process into a coordinated multi-agent investigation system.
+
+The system must:
+
+- Accept an incident ID, onboarding ID, API name, error message, process instance ID, or failure description.
+- Automatically plan the investigation.
+- Discover the relevant source code using CUO Graph.
+- Collect runtime, log, trace, database, workflow and deployment evidence.
+- Delegate independent investigations to specialized subagents.
+- Execute independent investigations concurrently where supported.
+- Correlate all findings.
+- Validate the actual root cause against source code and runtime evidence.
+- Generate a comprehensive, technically accurate RCA.
+
+Do not build another chatbot. Build an investigation engine using Copilot's agent orchestration capabilities.
+
+2. Critical constraints
+
+Before implementation, understand and respect these requirements.
+
+1. Do NOT modify, overwrite, rename or delete the existing "rca.instructions.md".
+2. Treat the existing RCA instructions as the authoritative investigation policy.
+3. Do NOT replace existing CLI tools with MCP servers.
+4. Do NOT introduce Google ADK, LangChain, CrewAI or another external agent framework.
+5. Reuse existing CLI tools and their installed skills.
+6. Do not invent CLI commands, arguments, tool names or output schemas.
+7. Inspect the installed Copilot capabilities and actual tool availability before designing agents.
+8. Do not assume that creating custom agents automatically guarantees parallel execution.
+9. Preserve environment-specific investigation rules, especially Azure-specific routing.
+10. Keep all investigation operations read-only unless the user explicitly authorizes a change.
+11. Do not expose credentials, access tokens or customer-sensitive data.
+12. Do not claim an investigation was completed if a required source was not queried.
+
+3. Existing RCA environment
+
+The existing environment contains the following tools.
+
+Tool| Existing skill| Responsibility
+"cuo-map"| "cuo-call-map"| Locate source code, functions, classes, callers and dependencies
+"pup"| "dd-pup"| Datadog logs, APM traces, error tracking, live debugging and client logs
+"kb"| "kibanalogs"| Kibana BPMN workflow and worker logs
+"operate"| "operate"| Camunda process instances, incidents, variables, child processes and stuck steps
+"wbd"| "wbd"| Deployment images, branches, commits and Jenkins/GitLab pipeline information
+"sqlci"| "sqlci"| CUO test databases, stored values, datapoints, JSON, checklists, milestones and audit data
+"gitlab"| "gitlab-operations"| Remote repository files, branch/tag/commit comparisons, merge requests and pipeline/job logs
+
+These are existing capabilities. Reuse them.
+
+Existing investigation rules
+
+Preserve the routing rules from the existing RCA instruction file:
+
+- Use local workspace code and Git for source searches, file reads, diffs and history.
+- Use GitLab only when the required repository or revision is unavailable locally.
+- Use CUO Map for code mapping and function discovery.
+- For non-Azure environments, use the relevant Datadog and Kibana sources.
+- For Azure environments, follow the existing Azure override: Pup exclusively for end-to-end application log validation, and the appropriate Azure-aware arguments for SQL CI, Operate and WBD.
+- A request may span multiple services and systems. Investigate every relevant evidence source.
+- Do not assume the first logged exception is the root cause.
+- Do not draw conclusions from truncated results.
+- Respect the existing read-only and security rules.
+
+Read the complete existing RCA instruction file before designing the system. Do not reproduce or rewrite its contents.
+
+4. Target architecture
+
+Build the following architecture using supported GitHub Copilot custom agents, subagents, Agent Skills and CLI tool access.
+
+                     USER REQUEST
+                          |
+                          |
+                 MASTER RCA AGENT
+                     ORCHESTRATOR
+                          |
+                INVESTIGATION PLANNER
+                          |
+           +--------------+--------------+
+           |              |              |
+           v              v              v
+      CODE AGENT     RUNTIME AGENT   WORKFLOW AGENT
+      CUO MAP        PUP / KIBANA    OPERATE / KB
+           |              |              |
+           +--------------+--------------+
+                          |
+           +--------------+--------------+
+           |                             |
+           v                             v
+     DATABASE AGENT               DEPLOYMENT AGENT
+     SQL CI                       WBD / GITLAB
+           |                             |
+           +--------------+--------------+
+                          |
+                          v
+                EVIDENCE AGGREGATOR
+                          |
+                          v
+                EVIDENCE VALIDATOR
+                          |
+                          v
+                 RCA SYNTHESIS AGENT
+                          |
+                          v
+                   FINAL RCA REPORT
+
+This is a logical architecture. Determine the actual supported delegation and parallel execution mechanisms in the installed Copilot harness before implementing it.
+
+5. Master RCA Orchestrator
+
+Create a dedicated custom agent:
+
+"rca-orchestrator.agent.md"
+
+Its responsibility is to coordinate the complete investigation.
+
+Responsibilities
+
+1. Understand the user's incident.
+2. Identify the environment, service, incident identifiers, time window and affected API or workflow.
+3. Read and follow the existing RCA instructions.
+4. Identify which investigation domains are applicable.
+5. Create an explicit investigation plan.
+6. Delegate bounded investigation tasks to specialist subagents.
+7. Run independent tasks concurrently where supported.
+8. Track every task and its execution status.
+9. Collect structured findings from all subagents.
+10. Identify missing or contradictory evidence.
+11. Initiate targeted follow-up investigations when necessary.
+12. Validate the complete evidence set.
+13. Produce the final RCA.
+
+Mandatory orchestration rules
+
+The orchestrator must:
+
+- Never perform the entire investigation as one unstructured reasoning task.
+- Never assume that a subagent has executed simply because it was requested.
+- Inspect actual subagent execution results.
+- Track completed, failed, unavailable, pending and not-applicable tasks.
+- Wait for required investigation results before RCA synthesis.
+- Never silently skip a mandatory investigation.
+- Avoid duplicate CLI queries across agents when results can safely be shared.
+- Keep the master context focused on plans, findings and conclusions rather than raw log dumps.
+
+Use the Copilot-native subagent delegation mechanism available in the selected harness.
+
+If parallel delegation is unavailable, report the limitation and use a controlled sequential fallback. Do not pretend parallel execution occurred.
+
+6. Specialist agents
+
+Create the following dedicated custom agents.
+
+Agent 1: RCA Code Investigator
+
+File:
+
+"rca-code-investigator.agent.md"
+
+Primary tool: "cuo-map"
+
+Responsibilities:
+
+- Identify the API, endpoint, controller and function.
+- Locate the actual implementation in the repository.
+- Trace calling methods and downstream dependencies.
+- Identify database interactions and external service calls.
+- Identify exception handling and retry mechanisms.
+- Compare relevant code with the deployed revision.
+- Return exact repository, branch, commit, file, class, method and line references.
+
+Use local code and Git first. Use GitLab only when the required revision is unavailable locally.
+
+Agent 2: RCA Runtime Investigator
+
+File:
+
+"rca-runtime-investigator.agent.md"
+
+Primary tools: "pup", "kb"
+
+Responsibilities:
+
+- Investigate application errors.
+- Identify correlation IDs, trace IDs and request IDs.
+- Collect relevant log events and stack traces.
+- Examine distributed traces and failed spans.
+- Identify latency, timeouts and repeated requests.
+- Correlate evidence across services.
+- Identify whether an exception is a symptom or a causal event.
+
+Respect the existing environment-specific logging rules. Do not use Kibana for Azure application log validation when the existing Azure override requires Pup.
+
+Agent 3: RCA Workflow Investigator
+
+File:
+
+"rca-workflow-investigator.agent.md"
+
+Primary tools: "operate", "kb"
+
+Responsibilities:
+
+- Identify relevant Camunda process instances.
+- Inspect process status and incidents.
+- Identify stuck activities and failed jobs.
+- Inspect retries and worker execution.
+- Follow parent and child process relationships.
+- Correlate process IDs, job IDs and timestamps.
+- Identify workflow-to-service execution relationships.
+
+Agent 4: RCA Database Investigator
+
+File:
+
+"rca-database-investigator.agent.md"
+
+Primary tool: "sqlci"
+
+Responsibilities:
+
+- Identify relevant records and database entities.
+- Inspect stored values and state transitions.
+- Validate datapoints, JSON, checklists, milestones and audit data where relevant.
+- Identify duplicate records and inconsistent state.
+- Correlate database timestamps with runtime and workflow events.
+- Return the exact table, identifier, relevant value and query scope.
+
+Never execute INSERT, UPDATE, DELETE or other modifying SQL operations.
+
+Agent 5: RCA Deployment Investigator
+
+File:
+
+"rca-deployment-investigator.agent.md"
+
+Primary tools: "wbd", "gitlab"
+
+Responsibilities:
+
+- Identify the deployed environment.
+- Identify the deployed image and branch.
+- Retrieve the deployed commit SHA.
+- Identify pipeline and deployment history.
+- Compare deployed code with the current workspace.
+- Retrieve relevant commit differences.
+- Identify changes introduced between revisions.
+- Validate whether the suspected implementation was actually deployed.
+
+Do not assume the local branch is the deployed branch.
+
+Agent 6: RCA Evidence Reviewer
+
+File:
+
+"rca-evidence-reviewer.agent.md"
+
+Responsibilities:
+
+- Independently review findings from other agents.
+- Verify that claims have supporting evidence.
+- Identify conflicting timestamps, IDs and conclusions.
+- Challenge unsupported causal explanations.
+- Identify missing evidence.
+- Check whether the proposed root cause is consistent with the actual implementation.
+- Distinguish confirmed root causes from hypotheses.
+
+The reviewer must not simply repeat the conclusions of the other agents.
+
+7. Evidence Collection Skill
+
+Create a reusable Agent Skill:
+
+".github/skills/rca-evidence-collection/SKILL.md"
+
+Purpose:
+
+Provide a common evidence collection and reporting contract for every specialist agent.
+
+The skill must define:
+
+- How to collect evidence.
+- How to identify source systems.
+- How to preserve timestamps and identifiers.
+- How to correlate evidence.
+- How to distinguish facts from assumptions.
+- How to report unavailable sources.
+- How to return structured findings to the orchestrator.
+
+Standard evidence structure
+
+Every specialist agent must return findings using a consistent structure.
+
+For each finding, capture:
+
+Field| Description
+Finding ID| Unique identifier
+Investigation domain| Code, runtime, workflow, database or deployment
+Claim| What the evidence demonstrates
+Source system| Actual tool used
+Environment| DEV, IT, UAT or relevant environment
+Timestamp| Original event timestamp and timezone
+Correlation identifiers| Request, trace, process or job identifiers
+Evidence details| Actual observation
+Source reference| Query, log event, trace, process or code reference
+Confidence| High, medium or low
+Limitations| Missing or incomplete evidence
+
+Do not invent identifiers or confidence values.
+
+Use exact references returned by the tools wherever available.
+
+8. Investigation execution strategy
+
+Implement the following stages.
+
+Stage A: Incident understanding
+
+The orchestrator identifies:
+
+- Incident type.
+- Environment.
+- Affected service.
+- API or workflow.
+- Incident/request/process identifiers.
+- Approximate time window.
+- User-visible symptom.
+
+If essential information is missing, ask the user one focused clarification.
+
+Stage B: Investigation planning
+
+Create a task matrix.
+
+Investigation| Required condition| Assigned agent
+Code mapping| API, function or code failure involved| Code Agent
+Runtime logs| Runtime failure or error involved| Runtime Agent
+Workflow| Camunda/workflow involved| Workflow Agent
+Database| Stored state or data involved| Database Agent
+Deployment| Runtime branch, image or release involved| Deployment Agent
+
+Do not restrict the investigation to the initially reported symptom. Follow newly discovered evidence into other relevant systems.
+
+Stage C: Parallel execution
+
+Delegate independent investigation tasks concurrently.
+
+For example:
+
+- CUO code mapping.
+- Runtime log collection.
+- Camunda process investigation.
+- Database validation.
+- Deployment revision identification.
+
+Dependencies must be respected.
+
+For example, if a runtime query requires the exact service or function discovered by CUO, perform the initial discovery first and then delegate the dependent query.
+
+Stage D: Evidence aggregation
+
+Collect every agent's structured output.
+
+Build a unified investigation timeline using the original event timestamps.
+
+Correlate:
+
+- Request IDs.
+- Correlation IDs.
+- Trace IDs.
+- Process instance IDs.
+- Job keys.
+- Database record identifiers.
+- Repository revisions.
+- Commit SHAs.
+- Service and method names.
+
+Stage E: Cross-validation
+
+Compare the evidence against the actual deployed source code.
+
+For example, when investigating duplicate account creation:
+
+1. Identify the incoming API request.
+2. Find the actual controller and service implementation using CUO.
+3. Identify the deployed branch and commit using WBD.
+4. Inspect the relevant source-code differences.
+5. Check runtime traces and logs.
+6. Inspect Camunda execution and retries.
+7. Validate database records through SQL CI.
+8. Establish whether the observed execution sequence explains the duplicate operation.
+
+Do not conclude that a retry caused duplication unless the evidence establishes the relationship.
+
+Stage F: RCA synthesis
+
+The RCA Synthesis Agent receives the verified evidence and prepares the final report.
+
+The report must distinguish:
+
+- Confirmed root cause.
+- Contributing factors.
+- Observable symptoms.
+- Alternative explanations.
+- Unverified hypotheses.
+- Evidence still required.
+
+If the evidence is insufficient, say so instead of manufacturing a root cause.
+
+9. Final RCA report format
+
+Use an improved production-grade report structure.
+
+1. Executive Summary
+
+- What failed?
+- Which service or workflow was affected?
+- What is the confirmed root cause?
+- What was the impact?
+
+2. Incident Context
+
+- Environment.
+- Service.
+- API or workflow.
+- Incident identifiers.
+- Investigation time window.
+- Deployed image and revision.
+
+3. Failure Timeline
+
+Present chronological events with timestamps and timezone.
+
+4. Technical Causal Chain
+
+Explain the sequence from the original trigger to the visible failure.
+
+Include service names, methods, workflow steps and data involved.
+
+5. Confirmed Root Cause
+
+Explain exactly why the failure occurred.
+
+Separate direct causes from contributing factors.
+
+6. Cross-System Findings
+
+Summarize findings from:
+
+- Source code.
+- Runtime logs.
+- Distributed traces.
+- Database records.
+- Camunda workflows.
+- Deployment and commit history.
+
+7. Alternative Causes Considered
+
+List other possible explanations and whether the evidence supports or rules them out.
+
+8. Evidence and References
+
+This must be the final section of the report.
+
+Include actual evidence, not merely a list of tools that were queried.
+
+Evidence categories:
+
+A. Source Code
+
+- Repository.
+- Deployed branch.
+- Commit SHA.
+- File and line numbers.
+- Relevant method and implementation.
+- Actual code differences.
+
+B. Runtime Logs
+
+- Source system.
+- Service.
+- Timestamp.
+- Correlation/request ID.
+- Actual relevant log events.
+- Error or exception details.
+
+C. Distributed Traces
+
+- Trace ID.
+- Span ID.
+- Failed span.
+- Parent/child relationships.
+- Duration and error details.
+
+D. Database
+
+- Table and record identifier.
+- Relevant stored values.
+- Query scope.
+- Observed data state.
+
+E. Workflow
+
+- Process instance ID.
+- Activity and job identifiers.
+- Incident details.
+- Retry history.
+- Relevant workflow state.
+
+F. Deployment
+
+- Environment.
+- Image.
+- Branch.
+- Commit SHA.
+- Pipeline information.
+- Relevant revision comparison.
+
+Do not make locally saved files the primary evidence of the RCA. Evidence must be understandable and verifiable by other engineers through the actual code, logs, traces, database records, workflow information and deployment references.
+
+If an export is created under the existing policy, treat it only as supplemental evidence.
+
+10. Tool ownership and access
+
+Inspect the actual CLI and skill availability before creating agent definitions.
+
+Give every specialist only the tools needed for its role.
+
+The orchestrator should coordinate specialists, not unnecessarily duplicate all their tool access.
+
+Do not create fictional tool names in agent configuration. Use only tool identifiers confirmed by the installed Copilot environment.
+
+If an existing skill is required, load and follow that skill's instructions.
+
+If a CLI is unavailable, report the limitation. Never replace a failed tool invocation with invented evidence.
+
+11. Production reliability requirements
+
+The system must implement:
+
+- Explicit task status tracking.
+- Bounded parallel execution.
+- Tool timeouts.
+- Clear failure reporting.
+- Retry only for safe, idempotent read operations.
+- Duplicate query avoidance.
+- Structured agent handoffs.
+- Evidence provenance.
+- Timestamp normalization.
+- Conflict detection.
+- Independent RCA review.
+- Read-only execution.
+- Context-efficient agent communication.
+
+The system must not:
+
+- Generate an RCA from a single log line.
+- Treat a 500 error as the root cause.
+- Ignore missing evidence.
+- Invent code locations or database values.
+- Assume a local revision matches production.
+- Hide tool failures.
+- Claim parallel execution without actual delegated execution.
+
+12. Implementation phases
+
+Work in the following order.
+
+Phase 1: Inspect
+
+Before changing anything:
+
+1. Inspect the VS Code Copilot harness.
+2. Inspect existing custom agents and skills.
+3. Identify the supported subagent delegation mechanism.
+4. Verify whether independent subagents can execute concurrently.
+5. Inspect the existing CLI tools and skill definitions.
+6. Read the existing "rca.instructions.md" without modifying it.
+7. Identify existing naming conventions and repository structure.
+
+Return an architecture and implementation plan first.
+
+Phase 2: Design
+
+Propose:
+
+- Master orchestrator.
+- Specialist agents.
+- Evidence collection skill.
+- Agent-to-tool mapping.
+- Delegation strategy.
+- Parallel execution strategy.
+- Evidence handoff contract.
+- RCA synthesis process.
+
+Identify any capabilities that are unavailable in the current Copilot environment.
+
+Phase 3: Implement
+
+After presenting the plan, implement the approved architecture.
+
+Create the required custom agent files and the reusable evidence collection skill in the supported workspace locations.
+
+Do not modify existing RCA instructions or existing CLI implementations.
+
+Phase 4: Validate
+
+Test the architecture with a representative historical or non-production incident.
+
+Verify:
+
+- The master agent delegates to actual specialist agents.
+- Independent tasks execute concurrently when supported.
+- Correct CLI tools are invoked.
+- Each agent returns structured evidence.
+- The orchestrator receives all results.
+- Missing sources are reported.
+-
