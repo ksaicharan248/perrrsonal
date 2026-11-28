@@ -1,303 +1,231 @@
-TASK: Create My Professional One-Page ATS-Optimized Resume Using LaTeX
+TASK: Upgrade My Resume to a Top-Tier, ATS-Optimized Software Engineer Resume
 
 Act as a combination of:
 
-1. Senior Technical Recruiter (10+ years of experience hiring software engineers).
-2. Professional Resume Architect.
-3. ATS Optimization Specialist.
-4. Technical Career Storyteller.
-5. LaTeX / Overleaf Resume Designer.
+1. Senior Technical Recruiter at Google, Microsoft, Amazon and top product-based companies.
+2. ATS Resume Optimization Specialist.
+3. Engineering Hiring Manager specializing in Java, Spring Boot, Microservices and Cloud Engineering.
+4. Professional LaTeX Resume Designer.
 
-Your task is to create a highly professional, single-page software engineering resume using LaTeX that I can directly copy into Overleaf and compile into a PDF.
+Your task is to completely audit, improve and redesign my existing resume into a highly professional, single-page, ATS-friendly Software Engineer resume.
 
-1. FIRST: Collect My Existing Context
+1. First: Understand My Existing Information
 
-Before writing anything, thoroughly inspect your existing memory, previous conversations, available project context, and accessible workspace files.
+You already have access to my technical background, professional experience, projects and technologies through your existing conversation context and memory.
 
-You already have information about my:
+Use:
 
-- Professional experience and career progression.
-- Current and previous job responsibilities.
-- Technical skills and technology stack.
-- Real-world enterprise projects.
-- Banking and Financial Services domain experience.
-- Backend and frontend development.
-- Microservices and distributed architecture.
-- Production issues, debugging and root-cause analysis.
-- Cloud migration and DevOps exposure.
-- Engineering contributions and responsibilities.
+- My existing resume as the primary source.
+- My previously shared professional experience and technical discussions.
+- My existing project descriptions and GitHub repositories, where accessible.
 
-DO NOT ask me to repeat information that is already available.
+Do not ask me to repeat information already available to you.
 
-Build a structured internal profile containing:
+Do not invent achievements, metrics, responsibilities, certifications or technologies.
 
-- Professional experience.
-- Employment timeline.
-- Technical skills.
-- Project descriptions.
-- Engineering responsibilities.
-- Architecture exposure.
-- Tools and platforms.
-- Business domain knowledge.
-- Measurable achievements, if available.
+If a metric is unavailable, write a strong qualitative achievement instead of fabricating a number.
 
-Use my existing context as the primary source of truth.
+2. Target Professional Positioning
 
-Do not invent projects, achievements, certifications, technologies, employment dates or performance metrics.
+Position me as:
 
-If an important detail is unavailable, omit it rather than fabricate it.
+Software Engineer | Java | Spring Boot | Microservices | Cloud Engineering
 
-2. SKILL SELECTION: Use the Best Available Resume Skills
+Target roles:
 
-Inspect the available Claude Code skills, commands and relevant installed capabilities.
+- Java Backend Developer
+- Software Engineer
+- Spring Boot Developer
+- Backend Microservices Engineer
+- Full-Stack Developer (Java + React)
+- Cloud Application Engineer
 
-Prioritize skills that specialize in:
+Prioritize backend engineering and enterprise application development over frontend development.
 
-1. Professional resume writing.
-2. ATS optimization.
-3. Software engineering resume creation.
-4. Achievement-oriented bullet writing using STAR methodology.
-5. Technical keyword optimization.
-6. LaTeX resume generation.
-7. Professional document formatting.
+3. Professional Experience — Most Important Section
 
-If relevant skills are not installed, identify reputable GitHub repositories with strong community adoption and inspect their actual instructions before using them.
+Give my Cognizant experience the strongest positioning.
 
-Do not blindly install skills or execute untrusted scripts.
+Highlight my actual experience in:
 
-Select the best applicable capabilities and combine their useful methodologies into one resume-generation workflow.
+- Java and Spring Boot microservices development.
+- Enterprise Client Lifecycle Management (CLM) platform.
+- Banking and Financial Services domain.
+- Camunda BPM workflow orchestration.
+- REST API development and third-party integrations.
+- Apache Kafka and event-driven communication.
+- MySQL persistence and database optimization.
+- Azure Kubernetes Service (AKS) migration.
+- Docker, Jenkins, GitLab CI/CD and Rancher.
+- Datadog and Kibana observability.
+- Production troubleshooting and root cause analysis.
+- AI-assisted developer productivity and automation.
 
-Avoid unnecessary skill installation if your existing capabilities are sufficient.
+Pay special attention to my migration contribution involving 15 repositories and 3 Camunda workflows.
 
-3. TARGET PROFESSIONAL POSITIONING
+Explain the engineering challenges, technical ownership and contributions clearly without overstating my responsibilities.
 
-Position me as a Software Engineer / Full Stack Engineer with enterprise application development experience.
+Convert generic responsibility-based bullets into achievement-oriented statements.
 
-Prioritize my genuine experience with:
+Use this structure wherever possible:
 
-Backend
+Action + Technical Implementation + Engineering Impact.
 
-- Java
-- Spring Boot
-- Spring Security
-- Microservices
-- REST APIs
-- JWT / OAuth2
-- MySQL / SQL Server
+For example:
 
-Frontend
+Weak:
+"Worked on Java and Spring Boot microservices."
 
-- React.js
-- JavaScript / JSX
-- TypeScript
-- Redux
-- Microfrontend Architecture
-- Webpack Module Federation
+Strong:
+"Contributed and maintained Java Spring Boot microservices and secure REST APIs supporting enterprise client onboarding workflows."
 
-Distributed Systems & Infrastructure
+Do not force metrics into every bullet.
 
-- Camunda Workflow Orchestration
-- Apache Kafka
-- Docker
-- Kubernetes
-- Azure / AKS
-- Jenkins
-- GitLab CI/CD
-- HashiCorp Vault
-- Datadog
+4. Improve the Technical Skills Section
 
-Domain
+Organize skills into compact, recruiter-friendly categories.
 
-- Banking and Financial Services
-- Client Lifecycle Management
-- Client Onboarding
-- KYC and Identity Verification
-- Enterprise Workflow Automation
+Suggested structure:
 
-Only include technologies supported by my actual experience. Distinguish hands-on experience from exposure.
+- Programming Languages
+- Backend & Frameworks
+- Distributed Systems & Workflow Orchestration
+- Databases
+- Cloud & DevOps
+- Frontend
+- Observability & Developer Tools
 
-4. EXPERIENCE WRITING METHODOLOGY
+Prioritize Java, Spring Boot, Microservices, REST APIs, Kafka, Camunda, MySQL and Azure.
 
-Do not write generic job responsibilities.
+Remove redundant, low-value or weakly relevant tools.
 
-Convert my actual engineering work into concise, achievement-oriented statements.
+Do not list technologies merely because they appeared in a previous discussion. Include only technologies I have actually used and can defend in an interview.
 
-Use the STAR methodology:
+5. Improve Project Descriptions
 
-- Situation: What was the engineering or business challenge?
-- Task: What was my responsibility?
-- Action: What technical solution did I implement?
-- Result: What was the outcome?
+Review my existing projects:
 
-Prioritize:
+- Branch Footfall Analytics Platform with AI Assistant.
+- Full-Stack CRM Application.
+- Automatic Vehicle License Plate Detection.
 
-- Building and maintaining enterprise applications.
-- Designing and integrating microservices.
-- Developing scalable REST APIs.
-- Implementing frontend components and microfrontend architecture.
-- Workflow orchestration using Camunda.
-- Database query optimization and server-side pagination.
-- Production debugging and root-cause analysis.
-- Cloud migration and deployment-related engineering.
-- Performance, reliability and scalability improvements.
+Make descriptions technically meaningful.
 
-Use strong engineering verbs:
-Architected, Engineered, Implemented, Optimized, Integrated, Automated, Migrated, Improved, Developed.
+Emphasize:
 
-IMPORTANT:
-Never claim that I architected or led an entire system if my actual contribution was implementation or support.
+- Architecture and system design.
+- Backend implementation.
+- API development.
+- Database design.
+- AI integration.
+- Authentication and authorization.
+- Engineering decisions and technical complexity.
 
-Never invent numerical improvements or percentages.
+Where appropriate, include measurable outcomes only when supported by available evidence.
 
-5. ONE-PAGE RESUME STRUCTURE
+Do not make personal projects appear more complex than they actually are.
 
-Create exactly one A4 page.
+6. Rewrite the Professional Summary
 
-Use this order:
+Create a concise 3–4 line professional summary.
 
-1. Name and Contact Information
-2. Professional Summary
-3. Technical Skills
-4. Professional Experience
-5. Selected Technical Projects / Key Contributions
-6. Education
+It must:
 
-Keep the content concise and prioritize professional experience.
+- Communicate my actual professional experience.
+- Establish Java backend engineering as my primary strength.
+- Highlight enterprise banking platform experience.
+- Mention microservices, workflow orchestration and cloud exposure.
+- Avoid generic statements such as passionate developer, hardworking engineer or quick learner.
 
-Do not include:
+Make the first few seconds of reading communicate my technical value.
 
-- Photograph
-- Date of birth
-- Full residential address
-- Unnecessary personal details
-- Generic objective statements
-- References
-- Skill progress bars
-- Star ratings
-- Decorative icons
-- Unnecessary graphics
+7. LaTeX Resume Design Requirements
 
-Use my available contact information from memory where appropriate. Do not invent missing contact details.
+Generate a complete, production-ready LaTeX resume that I can directly copy into Overleaf.
 
-6. LATEX AND OVERLEAF REQUIREMENTS
+Design requirements:
 
-Generate a complete, standalone LaTeX document.
+- Strictly one A4 page.
+- Professional, minimal, modern appearance.
+- Single-column layout.
+- Black and white or subtle professional grey.
+- Excellent typography and visual hierarchy.
+- Consistent section spacing.
+- Readable font size (prefer approximately 9.5–10.5 pt).
+- Proper margins and line spacing.
+- Clickable LinkedIn, GitHub and email hyperlinks.
+- No profile photograph.
+- No skill progress bars.
+- No icons that interfere with ATS extraction.
+- No tables, multiple columns, text boxes or graphics that compromise parsing.
+- No unnecessary decorative elements.
+
+Do not achieve one-page output by making the text excessively small.
+
+Use ATS-compatible LaTeX techniques. Prefer a pdfLaTeX-compatible implementation with proper Unicode text extraction.
+
+8. ATS Optimization
+
+Optimize naturally for relevant job descriptions containing:
+
+Java, Spring Boot, Microservices, REST APIs, Spring Security, Kafka, Camunda BPM, MySQL, Azure, AKS, Docker, CI/CD, Kubernetes, Distributed Systems, Production Support, System Integration and React.
 
 Requirements:
 
-- A4 paper.
-- Exactly one page.
-- Professional typography.
-- Clean section headings.
-- Consistent spacing.
-- Readable font size (approximately 9–10.5 pt where appropriate).
-- Balanced margins.
-- Properly aligned dates and experience details.
-- Selectable, searchable PDF text.
-- Unicode-safe text handling.
-- ATS-friendly document structure.
-
-Prefer a simple, single-column layout.
-
-Use standard LaTeX packages where possible:
-
-- geometry
-- enumitem
-- titlesec
-- hyperref
-- xcolor
-- fontenc
-- lmodern
-
-Use pdfLaTeX-compatible code unless there is a compelling reason otherwise.
-
-Avoid:
-
-- Multi-column layouts.
-- Tables for critical resume content.
-- Text boxes.
-- Complex graphics.
-- Icons replacing contact labels.
-- Excessive styling.
-- Hidden keywords.
-- Non-standard fonts.
-
-Ensure the final LaTeX source compiles in Overleaf.
-
-7. ATS OPTIMIZATION
-
-Optimize for software engineering job descriptions.
-
-Include relevant keywords naturally without keyword stuffing.
-
-Ensure:
-
 - Standard section headings.
-- Clear employment titles.
-- Consistent company and date formatting.
-- Standard bullet points.
-- Searchable text.
-- No critical information inside images or graphical elements.
-- No fabricated skills or experience.
+- Consistent job titles and employment dates.
+- Relevant keywords integrated naturally.
+- No keyword stuffing.
+- No fabricated experience.
+- Clear professional chronology.
+- Strong technical terminology.
 
-Make the resume suitable for applications to:
+The resume should remain readable to both ATS software and human recruiters.
 
-- Software Engineer
-- Java Developer
-- Backend Developer
-- Full Stack Developer
-- React Developer
-- Java Spring Boot Developer
+9. Critical Quality Review
 
-8. QUALITY CONTROL
+Before producing the final version, perform three independent reviews.
 
-Before finalizing, conduct three reviews.
+Review 1 — Technical Recruiter
 
-Review 1 – Recruiter Review
+- Is the resume competitive for 1–2 years of software engineering experience?
+- Does the experience demonstrate actual engineering contributions?
+- Are the strongest technologies immediately visible?
 
-- Does the resume communicate my professional value within 10 seconds?
-- Is my experience positioned appropriately?
-- Are the strongest technical contributions prominent?
+Review 2 — ATS Specialist
 
-Review 2 – ATS Review
+- Can the document be parsed correctly?
+- Are section headings and dates recognizable?
+- Are important technical keywords present?
+- Is the PDF text extraction logical?
 
-- Are headings and employment details machine-readable?
-- Are technical keywords naturally incorporated?
-- Is the document compatible with standard ATS parsing?
+Review 3 — Engineering Hiring Manager
 
-Review 3 – LaTeX Review
+- Can I confidently explain every bullet in a technical interview?
+- Does the resume demonstrate backend engineering depth?
+- Are the achievements credible?
+- Is anything exaggerated or redundant?
 
-- Does the source compile?
-- Is the output exactly one A4 page?
-- Are there any overflowing sections?
-- Is the PDF text selectable?
-- Is the typography readable?
+Fix all identified issues before delivering the final output.
 
-If compilation tools are available, compile the document and inspect the resulting PDF. Make corrections until it meets the requirements.
+10. Final Deliverables
 
-Do not shrink the font excessively just to force everything onto one page. Prioritize relevant information and remove less important content instead.
+Provide:
 
-9. FINAL DELIVERABLES
+1. Complete LaTeX source code in one file named "main.tex".
+2. A single-page PDF compiled from that source, if compilation is available.
+3. A concise explanation of the major improvements.
+4. A list of any missing metrics or information that would further strengthen the resume.
+5. A final ATS and readability assessment.
 
-Create the following files in the current working directory:
+If working inside my local repository, save the final files in a dedicated "resume" directory without overwriting unrelated files.
 
-1. "resume.tex" – Complete Overleaf-compatible LaTeX source.
-2. "resume.pdf" – Final compiled one-page resume, if compilation is available.
-3. "resume_profile.md" – Structured record of the verified professional information used to create the resume.
+FINAL INSTRUCTION
 
-Also provide:
+Do not simply beautify my existing resume.
 
-- A brief explanation of the professional positioning.
-- A list of the strongest skills and keywords included.
-- Any missing information that could improve the resume.
-- Confirmation of whether the PDF was successfully compiled and verified as one page.
+Reposition my real experience to communicate the strongest credible version of my engineering profile.
 
-IMPORTANT FINAL INSTRUCTION:
+Prioritize substance over design, measurable impact over generic responsibilities, and technical credibility over impressive-sounding language.
 
-Do not generate a generic fresher resume.
-
-Create a polished, experienced-software-engineer-style resume that reflects my real enterprise engineering contributions.
-
-Content quality, technical credibility, ATS compatibility and readability are more important than visual decoration.
-
-Start by collecting and validating my existing context. Then create the final resume without waiting for additional input unless an essential fact is genuinely missing.
+I want a resume that makes a recruiter want to interview me, not just a resume that looks attractive.
