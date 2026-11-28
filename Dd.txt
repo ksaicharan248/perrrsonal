@@ -1,57 +1,303 @@
-Portfolio Engineering Guidelines
+TASK: Create My Professional One-Page ATS-Optimized Resume Using LaTeX
 
-Objective
+Act as a combination of:
 
-Build a premium, minimal, professional developer portfolio from scratch for Sai Charan K. The website must feel intentionally designed by a human, not generated from a generic AI landing-page template.
+1. Senior Technical Recruiter (10+ years of experience hiring software engineers).
+2. Professional Resume Architect.
+3. ATS Optimization Specialist.
+4. Technical Career Storyteller.
+5. LaTeX / Overleaf Resume Designer.
 
-Visual identity
+Your task is to create a highly professional, single-page software engineering resume using LaTeX that I can directly copy into Overleaf and compile into a PDF.
 
-- Background: solid #0D1117.
-- Surface: #151B23.
-- Primary accent: #4F8CFF, used sparingly.
-- Main text: #F0F6FC.
-- Secondary text: #9DA7B3.
-- Borders: subtle neutral grey.
-- Use translucent glass cards selectively with thin borders and restrained backdrop blur.
-- Use strong typography, deliberate spacing, asymmetrical composition where appropriate, and a clear visual hierarchy.
-- No gradients, neon, glow effects, rainbow badges, floating blobs, emoji decorations, excessive animations, or unnecessary glass effects.
-- Avoid generic centered hero layouts unless they genuinely improve the design.
-- Do not use invented metrics, fake testimonials, fake clients, or fabricated achievements.
+1. FIRST: Collect My Existing Context
 
-Professional positioning
+Before writing anything, thoroughly inspect your existing memory, previous conversations, available project context, and accessible workspace files.
 
-Present Sai Charan as a software engineer with experience in React, Java, Spring Boot, REST APIs, microservices, and enterprise application development.
+You already have information about my:
 
-Emphasize engineering decisions, problem-solving, maintainability, performance, and end-to-end ownership.
+- Professional experience and career progression.
+- Current and previous job responsibilities.
+- Technical skills and technology stack.
+- Real-world enterprise projects.
+- Banking and Financial Services domain experience.
+- Backend and frontend development.
+- Microservices and distributed architecture.
+- Production issues, debugging and root-cause analysis.
+- Cloud migration and DevOps exposure.
+- Engineering contributions and responsibilities.
 
-Keep employer-related project descriptions generic. Never expose confidential banking workflows, internal architecture, customer data, private repositories, or proprietary implementation details.
+DO NOT ask me to repeat information that is already available.
 
-Technical standards
+Build a structured internal profile containing:
 
-- Use React and TypeScript with Vite unless a justified alternative is approved.
-- Use reusable, well-structured components and a consistent design-token system.
-- Keep dependencies minimal and justified.
-- Build responsive layouts for mobile, tablet, and desktop.
-- Follow semantic HTML, accessible keyboard navigation, visible focus states, and appropriate contrast.
-- Optimize images, fonts, loading behavior, and Core Web Vitals.
-- Respect reduced-motion preferences.
-- Ensure every button, link, navigation item, and interaction works.
-- Include appropriate metadata, a descriptive page title, social sharing metadata, and a favicon.
-- Never expose secrets or commit environment files containing credentials.
+- Professional experience.
+- Employment timeline.
+- Technical skills.
+- Project descriptions.
+- Engineering responsibilities.
+- Architecture exposure.
+- Tools and platforms.
+- Business domain knowledge.
+- Measurable achievements, if available.
 
-Workflow
+Use my existing context as the primary source of truth.
 
-1. Use gstack to clarify the portfolio's goals before implementation.
-2. Establish the design direction and review it before coding.
-3. Create an engineering plan and identify the simplest suitable architecture.
-4. Implement in small, reviewable stages.
-5. Run available lint, type-check, build, and test commands.
-6. Use gstack code review and browser QA to find and fix defects.
-7. Inspect mobile and desktop layouts before release.
-8. Explain trade-offs and report any checks that could not be completed.
+Do not invent projects, achievements, certifications, technologies, employment dates or performance metrics.
 
-Do not deploy, push changes, or overwrite existing work without explicit approval.
+If an important detail is unavailable, omit it rather than fabricate it.
 
-Definition of done
+2. SKILL SELECTION: Use the Best Available Resume Skills
 
-The portfolio must be visually distinctive, fast, responsive, accessible, technically sound, free of placeholder content, and ready for deployment after final review.
+Inspect the available Claude Code skills, commands and relevant installed capabilities.
+
+Prioritize skills that specialize in:
+
+1. Professional resume writing.
+2. ATS optimization.
+3. Software engineering resume creation.
+4. Achievement-oriented bullet writing using STAR methodology.
+5. Technical keyword optimization.
+6. LaTeX resume generation.
+7. Professional document formatting.
+
+If relevant skills are not installed, identify reputable GitHub repositories with strong community adoption and inspect their actual instructions before using them.
+
+Do not blindly install skills or execute untrusted scripts.
+
+Select the best applicable capabilities and combine their useful methodologies into one resume-generation workflow.
+
+Avoid unnecessary skill installation if your existing capabilities are sufficient.
+
+3. TARGET PROFESSIONAL POSITIONING
+
+Position me as a Software Engineer / Full Stack Engineer with enterprise application development experience.
+
+Prioritize my genuine experience with:
+
+Backend
+
+- Java
+- Spring Boot
+- Spring Security
+- Microservices
+- REST APIs
+- JWT / OAuth2
+- MySQL / SQL Server
+
+Frontend
+
+- React.js
+- JavaScript / JSX
+- TypeScript
+- Redux
+- Microfrontend Architecture
+- Webpack Module Federation
+
+Distributed Systems & Infrastructure
+
+- Camunda Workflow Orchestration
+- Apache Kafka
+- Docker
+- Kubernetes
+- Azure / AKS
+- Jenkins
+- GitLab CI/CD
+- HashiCorp Vault
+- Datadog
+
+Domain
+
+- Banking and Financial Services
+- Client Lifecycle Management
+- Client Onboarding
+- KYC and Identity Verification
+- Enterprise Workflow Automation
+
+Only include technologies supported by my actual experience. Distinguish hands-on experience from exposure.
+
+4. EXPERIENCE WRITING METHODOLOGY
+
+Do not write generic job responsibilities.
+
+Convert my actual engineering work into concise, achievement-oriented statements.
+
+Use the STAR methodology:
+
+- Situation: What was the engineering or business challenge?
+- Task: What was my responsibility?
+- Action: What technical solution did I implement?
+- Result: What was the outcome?
+
+Prioritize:
+
+- Building and maintaining enterprise applications.
+- Designing and integrating microservices.
+- Developing scalable REST APIs.
+- Implementing frontend components and microfrontend architecture.
+- Workflow orchestration using Camunda.
+- Database query optimization and server-side pagination.
+- Production debugging and root-cause analysis.
+- Cloud migration and deployment-related engineering.
+- Performance, reliability and scalability improvements.
+
+Use strong engineering verbs:
+Architected, Engineered, Implemented, Optimized, Integrated, Automated, Migrated, Improved, Developed.
+
+IMPORTANT:
+Never claim that I architected or led an entire system if my actual contribution was implementation or support.
+
+Never invent numerical improvements or percentages.
+
+5. ONE-PAGE RESUME STRUCTURE
+
+Create exactly one A4 page.
+
+Use this order:
+
+1. Name and Contact Information
+2. Professional Summary
+3. Technical Skills
+4. Professional Experience
+5. Selected Technical Projects / Key Contributions
+6. Education
+
+Keep the content concise and prioritize professional experience.
+
+Do not include:
+
+- Photograph
+- Date of birth
+- Full residential address
+- Unnecessary personal details
+- Generic objective statements
+- References
+- Skill progress bars
+- Star ratings
+- Decorative icons
+- Unnecessary graphics
+
+Use my available contact information from memory where appropriate. Do not invent missing contact details.
+
+6. LATEX AND OVERLEAF REQUIREMENTS
+
+Generate a complete, standalone LaTeX document.
+
+Requirements:
+
+- A4 paper.
+- Exactly one page.
+- Professional typography.
+- Clean section headings.
+- Consistent spacing.
+- Readable font size (approximately 9–10.5 pt where appropriate).
+- Balanced margins.
+- Properly aligned dates and experience details.
+- Selectable, searchable PDF text.
+- Unicode-safe text handling.
+- ATS-friendly document structure.
+
+Prefer a simple, single-column layout.
+
+Use standard LaTeX packages where possible:
+
+- geometry
+- enumitem
+- titlesec
+- hyperref
+- xcolor
+- fontenc
+- lmodern
+
+Use pdfLaTeX-compatible code unless there is a compelling reason otherwise.
+
+Avoid:
+
+- Multi-column layouts.
+- Tables for critical resume content.
+- Text boxes.
+- Complex graphics.
+- Icons replacing contact labels.
+- Excessive styling.
+- Hidden keywords.
+- Non-standard fonts.
+
+Ensure the final LaTeX source compiles in Overleaf.
+
+7. ATS OPTIMIZATION
+
+Optimize for software engineering job descriptions.
+
+Include relevant keywords naturally without keyword stuffing.
+
+Ensure:
+
+- Standard section headings.
+- Clear employment titles.
+- Consistent company and date formatting.
+- Standard bullet points.
+- Searchable text.
+- No critical information inside images or graphical elements.
+- No fabricated skills or experience.
+
+Make the resume suitable for applications to:
+
+- Software Engineer
+- Java Developer
+- Backend Developer
+- Full Stack Developer
+- React Developer
+- Java Spring Boot Developer
+
+8. QUALITY CONTROL
+
+Before finalizing, conduct three reviews.
+
+Review 1 – Recruiter Review
+
+- Does the resume communicate my professional value within 10 seconds?
+- Is my experience positioned appropriately?
+- Are the strongest technical contributions prominent?
+
+Review 2 – ATS Review
+
+- Are headings and employment details machine-readable?
+- Are technical keywords naturally incorporated?
+- Is the document compatible with standard ATS parsing?
+
+Review 3 – LaTeX Review
+
+- Does the source compile?
+- Is the output exactly one A4 page?
+- Are there any overflowing sections?
+- Is the PDF text selectable?
+- Is the typography readable?
+
+If compilation tools are available, compile the document and inspect the resulting PDF. Make corrections until it meets the requirements.
+
+Do not shrink the font excessively just to force everything onto one page. Prioritize relevant information and remove less important content instead.
+
+9. FINAL DELIVERABLES
+
+Create the following files in the current working directory:
+
+1. "resume.tex" – Complete Overleaf-compatible LaTeX source.
+2. "resume.pdf" – Final compiled one-page resume, if compilation is available.
+3. "resume_profile.md" – Structured record of the verified professional information used to create the resume.
+
+Also provide:
+
+- A brief explanation of the professional positioning.
+- A list of the strongest skills and keywords included.
+- Any missing information that could improve the resume.
+- Confirmation of whether the PDF was successfully compiled and verified as one page.
+
+IMPORTANT FINAL INSTRUCTION:
+
+Do not generate a generic fresher resume.
+
+Create a polished, experienced-software-engineer-style resume that reflects my real enterprise engineering contributions.
+
+Content quality, technical credibility, ATS compatibility and readability are more important than visual decoration.
+
+Start by collecting and validating my existing context. Then create the final resume without waiting for additional input unless an essential fact is genuinely missing.
